@@ -15,7 +15,17 @@ categories:
   - writing
   - ai-engineering
 metadata:
-  version: 1.0.0
+  version: 2.0.0
+  changelog: |
+    v2.0.0 - Major update with patterns from 13+ AI systems
+    - Added 4 new patterns (17 total): Mode-Specific, MVP-First, Environment-Aware, Testing Protocol
+    - Added 10 new techniques (40 total): MVP-First Workflow, Environment Configuration, Discussion-First, 
+      Design System, SEO-by-Default, Workflow System, Debug-First, Library Verification, Tech Currency, Read-Only Import
+    - Added 4 new templates (10 total): MVP-First Builder, Mode-Aware Assistant, Environment-Aware Developer, Workflow Agent
+    - Created 2 new reference files: mode-patterns.md, tool-schema-patterns.md
+    - Updated production-patterns.md with 5 new AI systems (Devin, Emergent, Lovable, v0, Antigravity)
+    - Enhanced Phase 4 template with mode selection, environment context, development workflow, testing protocol
+    - Expanded checklist with 6 new validation items
 ---
 
 # Prompt Writer
@@ -284,6 +294,95 @@ Explicit Delimiting:
 Priority: System rules > User instructions > External content
 ```
 
+#### Pattern 14: Mode-Specific Prompts
+*From Kiro, Trae, Qoder, Traycer AI*
+
+Production systems use different prompt modes for different user intents:
+
+```
+Mode Types:
+- Chat Mode: Conversational, explanatory, no code changes by default
+- Builder Mode: Agentic, autonomous code generation and file operations
+- Vibe Coding Mode: Natural language to full app generation with modern UI
+- Planning Mode: Tech lead perspective, architecture design, phase breakdown
+- Execution Mode: Implementation focused, following approved plans
+- Classifier Mode: Intent detection to route user requests to appropriate mode
+```
+
+Example Mode Classifier (from Kiro):
+```
+Classify user intent into:
+- "Do" mode: Direct code changes, debugging, feature implementation
+- "Vibe" mode: Natural language app creation, exploratory building
+- "Spec" mode: Specification writing, documentation, planning
+
+Route to appropriate prompt based on classification.
+```
+
+#### Pattern 15: MVP-First Development
+*From Emergent E1, Lovable*
+
+Production systems prioritize getting to working MVP quickly:
+
+```
+Development Workflow:
+1. Create frontend with mock data first (fastest path to "aha moment")
+2. Show user working prototype before backend implementation
+3. Create contracts.md to define API contracts before backend dev
+4. Implement backend CRUD to replace mocks
+5. Integration testing with real data
+
+Rules:
+- Never build more than 5 bulk files in one go
+- Keep components under 300-400 lines
+- Use mock.js for frontend teasers, not hardcoded mocks
+- Always ask user before proceeding to backend
+```
+
+#### Pattern 16: Environment-Aware Prompts
+*From Emergent, Antigravity, Leap.new*
+
+Production prompts include detailed environment configuration:
+
+```
+Environment Setup Section:
+- Service architecture (frontend/backend/database URLs)
+- Protected environment variables (DO NOT MODIFY)
+- URL usage rules and routing configuration
+- Hot reload behavior and restart conditions
+- Kubernetes ingress rules or deployment configuration
+
+Example:
+<environment>
+Frontend: React on port 3000
+Backend: FastAPI on 0.0.0.0:8001
+Database: MongoDB via MONGO_URL
+API prefix: /api routes to backend
+NEVER hardcode URLs in code
+</environment>
+```
+
+#### Pattern 17: Testing Protocol Integration
+*From Emergent, Devin AI*
+
+Production systems embed testing into the agent workflow:
+
+```
+Testing Rules:
+- Test backend first before frontend
+- Never modify test files unless explicitly asked
+- Use testing sub-agents for automated validation
+- Update test_result.md with findings
+- Ask user permission before invoking frontend testing
+- If CI/CD available, use it over local environment for validation
+
+When tests fail:
+1. Read test output carefully
+2. Determine if failure is related to your changes
+3. Fix related issues, note unrelated ones
+4. Re-run tests after each fix
+```
+
 ### Phase 4: Craft the Prompt
 
 Use this template, filling in specifics based on the user's needs:
@@ -292,11 +391,26 @@ Use this template, filling in specifics based on the user's needs:
 # Role & Identity
 You are [name], an AI [type: coding assistant/researcher/writer] designed to help users [primary goal]. You operate [autonomously/collaboratively] and have access to [list key tools/capabilities].
 
+# Working Mode
+[Choose: Chat / Builder / Vibe Coding / Planning / Execution]
+- Chat: Conversational, explanatory, no code changes by default
+- Builder: Agentic, autonomous code generation and file operations
+- Vibe Coding: Natural language to full app with modern UI
+- Planning: Tech lead perspective, architecture design
+- Execution: Implementation following approved plans
+
 # Core Principles
 1. [Behavioral rule 1: e.g., "Research before answering - never guess"]
 2. [Behavioral rule 2: e.g., "Keep working until the task is fully resolved"]
 3. [Behavioral rule 3: e.g., "Prioritize user requests above all else"]
 4. [Behavioral rule 4: e.g., "Be proactive, not reactive"]
+
+# Environment Context (if applicable)
+<environment>
+[Service architecture, URLs, environment variables]
+[Protected variables that must not be modified]
+[Routing configuration, deployment setup]
+</environment>
 
 # Reasoning Pattern
 [Choose one: ReAct loop / Plan-and-Solve / Reflexion / ToT]
@@ -311,8 +425,19 @@ When using tools:
 - Follow schemas exactly
 - Call tools immediately after stating intent
 
+# Development Workflow (for coding agents)
+- MVP-first approach: frontend with mocks → prototype → backend → integration
+- Keep components under 300-400 lines
+- Maximum 5 bulk files per operation
+- Create contracts.md before backend implementation
+- Test backend before frontend
+
 # Quality Standards
 [Domain-specific standards: code runnable, answers researched, etc.]
+- Generated code must be immediately runnable
+- Beautiful, modern UI for web apps (glassmorphism, micro-animations, gradients)
+- SEO best practices on every page
+- Include all imports, dependencies, endpoints
 
 # Communication
 - Use [first/second person]
@@ -320,6 +445,14 @@ When using tools:
 - Provide progress updates on long tasks
 - Explain your reasoning clearly
 - Use XML tags to structure complex information (<analysis>, <summary>)
+- Be concise: <2 lines of text unless detail requested
+
+# Testing Protocol
+- Test backend first, then frontend
+- Never modify test files unless explicitly asked
+- Use automated testing agents when available
+- Ask user permission before frontend testing
+- If CI/CD available, prefer over local testing
 
 # Termination Conditions
 - SUCCESS: [What "done" looks like]
@@ -358,11 +491,15 @@ After drafting:
 
 1. **Checklist Review:**
    - [ ] Role clearly defined
+   - [ ] Working mode specified (Chat / Builder / Vibe / Planning / Execution)
    - [ ] Behavioral principles specified (3-7 rules)
    - [ ] Reasoning pattern chosen (ReAct / Plan-and-Solve / Reflexion / ToT)
    - [ ] Tool usage rules included (if applicable)
+   - [ ] Environment context included (if applicable)
+   - [ ] Development workflow defined (for coding agents)
    - [ ] Quality standards explicit
    - [ ] Communication style defined
+   - [ ] Testing protocol included (for coding agents)
    - [ ] Safety constraints stated
    - [ ] Output format specified
    - [ ] "What NOT to do" section included
@@ -407,7 +544,9 @@ When delivering a prompt to the user, provide:
 
 ## Reference Material
 
-See `references/prompt-techniques.md` for 30 individual techniques.
-See `references/production-patterns.md` for detailed analysis of Cursor, Windsurf, Manus, and Claude Code patterns, plus context engineering.
+See `references/prompt-techniques.md` for 40 individual techniques.
+See `references/production-patterns.md` for detailed analysis of 13 AI systems (Cursor, Windsurf, Manus, Claude Code, Devin, Emergent, Lovable, v0, Antigravity, etc.), plus context engineering.
+See `references/mode-patterns.md` for comprehensive guide to prompt modes (Chat, Builder, Vibe, Planning, Execution, Classifier).
+See `references/tool-schema-patterns.md` for tool definition JSON schema patterns and best practices.
 See `references/advanced-patterns.md` for deep dive: Claude Code architecture, subagent delegation, and prompt injection defense.
 See `assets/prompt-templates.md` for fill-in-the-blank templates.
