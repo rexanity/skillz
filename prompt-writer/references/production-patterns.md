@@ -219,3 +219,111 @@ Based on what production systems DON'T do:
 - ❌ Unstructured output
 - ❌ No context preservation
 - ❌ Guessing instead of researching
+
+---
+
+## 7. Context Engineering — The Layer Above Prompt Engineering
+*From 2025-2026 research (arXiv:2510.21413, DigitalOcean, contextual.ai)*
+
+**Key insight**: Prompt engineering is *how* you ask. Context engineering
+is *what* the model has access to when answering. Without proper context,
+even perfect prompts produce generic or hallucinated outputs.
+
+### Prompt Engineering vs Context Engineering
+
+| Prompt Engineering | Context Engineering |
+|---|---|
+| How you phrase the question | What textbook the model has open |
+| Instruction structure | Information retrieval pipeline |
+| Behavioral rules | Domain-specific knowledge injection |
+| Output format specification | Tool output cleaning & structuring |
+
+### Layered Context Design
+
+Organize agent inputs into distinct, purpose-driven layers:
+
+```
+Layer 1: System Rules (stable, cacheable)
+  - Role definition, output style, safety rules, format requirements
+
+Layer 2: Project Context (version-controlled files)
+  - AGENTS.md, CLAUDE.md, architecture docs, conventions
+
+Layer 3: Task Context (current request)
+  - User's specific query, active files, cursor position
+
+Layer 4: Retrieved Context (dynamic, from RAG/tools)
+  - Relevant documentation, code snippets, prior decisions
+
+Layer 5: Memory (persistent, across sessions)
+  - User preferences, historical interactions, learned patterns
+
+Layer 6: Tool Outputs (real-time, cleaned)
+  - Raw API/DB results → cleaned → structured → appended
+```
+
+### AGENTS.md Pattern (Machine-Readable Context Files)
+
+Projects use version-controlled context files that agents auto-inject:
+
+```markdown
+# AGENTS.md — AI Agent Context for This Project
+
+## Goals
+What this project does, what agents should accomplish
+
+## Tech Stack
+Languages, frameworks, dependencies, versions
+
+## Architecture
+Directory structure, key modules, component relationships
+
+## Conventions
+Coding standards, naming, formatting rules, best practices
+
+## Commands
+Build, test, run, deploy — exact commands
+
+## Contribution Guidelines
+Branching, code review, CI requirements
+
+## Security
+Secret management, access controls, precautions
+
+## Troubleshooting
+Common errors, diagnostic steps, known issues
+```
+
+### 5 Instructional Styles for Context Files
+
+| Style | Purpose | Example |
+|---|---|---|
+| Descriptive | Document existing practices | "This project uses Jest for testing." |
+| Prescriptive | Dictate explicit actions | "Follow the existing code style." |
+| Prohibitive | Set operational boundaries | "Never commit directly to main." |
+| Explanatory | Provide reasoning context | "Avoid hard-coded waits to prevent timing issues." |
+| Conditional | Situational logic | "If you need reflection, use ReflectionUtils." |
+
+### Context Engineering Best Practices
+
+1. **Minimal Sufficiency**: Only include essential information. Context
+   bloat degrades accuracy and increases "needle in a haystack" failures.
+2. **Preserve Structure**: Don't flatten documents into raw text. Retain
+   tables, figures, and hierarchical relationships.
+3. **Clean Tool Outputs**: Raw API/DB results → clean → condense →
+   format as structured text/JSON before appending to context.
+4. **Dynamic Management**: Continuously adjust included/excluded info
+   based on conversation state, not static one-time prompts.
+5. **Context Trimming**: Automatically drop outdated messages, summarize
+   long history, discard low-relevance data before each model call.
+6. **Treat as Infrastructure**: Version control, test, and govern context
+   files with the same rigor as production code.
+7. **Co-Evolve with Code**: Context files should evolve alongside source
+   code, test suites, and CI pipelines to prevent agent drift.
+
+### Placement Matters
+
+Research finding: Place critical instructions at the **top** of the
+prompt to counteract attention decay in long context windows. The
+beginning and end of prompts receive disproportionate attention from
+the model.

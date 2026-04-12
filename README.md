@@ -61,10 +61,10 @@ Once installed, activate the skill when you need to:
 
 | File | Purpose |
 |------|---------|
-| `SKILL.md` | Main skill with 5-phase prompt writing workflow |
-| `references/production-patterns.md` | Analysis of real AI system prompts |
-| `references/prompt-techniques.md` | 22 prompt engineering techniques |
-| `references/advanced-patterns.md` | Deep dive: Claude Code architecture & patterns |
+| `SKILL.md` | Main skill with 5-phase prompt writing workflow, 13 patterns |
+| `references/production-patterns.md` | Analysis of 7 AI system patterns + context engineering |
+| `references/prompt-techniques.md` | 30 prompt engineering techniques |
+| `references/advanced-patterns.md` | Deep dive: Claude Code architecture, subagent delegation, injection defense |
 | `assets/prompt-templates.md` | 6 production-grade templates |
 
 ## What's Inside
@@ -73,6 +73,13 @@ Built from analysis of production AI systems:
 - **Windsurf (Cascade)** - Agentic coding patterns
 - **Manus AI** - Autonomous agent patterns
 - **Cursor** - IDE integration patterns
-- **Claude Code** - Foundation model patterns
+- **Claude Code** - Foundation model patterns, subagent delegation
 
-Includes: autonomous execution loops, tool protocols, safety models, memory management, code quality standards, and structured communication formats.
+Plus 2025-2026 research on:
+- **ReAct** (Stanford) - Reason + Act loops for autonomous agents
+- **Context Engineering** - What knowledge to provide, not just how to ask
+- **Prompt Injection Defense** - Security patterns for agents reading external content
+- **Termination Conditions** - Preventing runaway agents
+- **Reflexion & Self-Correction** - Agents that learn from their own mistakes
+
+Includes: autonomous execution loops, tool protocols, safety models, memory management, code quality standards, structured communication formats, reasoning patterns (ReAct, Plan-and-Solve, ToT, Reflexion), error recovery, drift prevention, and injection defense.
