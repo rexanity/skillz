@@ -9,7 +9,7 @@ Expert AI prompt writing skill built with production-proven patterns from Windsu
 Install directly from this repository:
 
 ```bash
-paks install https://github.com/YOUR_USERNAME/prompt-writer/tree/main/prompt-writer
+paks install https://github.com/rexanity/skillz/tree/main/prompt-writer
 ```
 
 Or if published to the registry:
@@ -24,10 +24,10 @@ Copy the skill files to your AI tool's skill directory:
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/prompt-writer.git
+git clone https://github.com/rexanity/skillz.git
 
 # Copy the skill folder to your tool's skills directory
-cp -r prompt-writer/prompt-writer ~/.your-ai-tool/skills/
+cp -r skillz/prompt-writer ~/.your-ai-tool/skills/
 ```
 
 Or simply copy the entire `prompt-writer/` folder wherever your AI agent can access it:
