@@ -4,7 +4,13 @@ Expert AI prompt writing skill built with production-proven patterns from Windsu
 
 ## Installation
 
-### Option 1: With Paks (Recommended)
+### Option 1: With Vercel Skills (Recommended)
+
+```bash
+npx @vercel-labs/skills install https://github.com/rexanity/skillz/tree/main/prompt-writer
+```
+
+### Option 2: With Paks
 
 Install directly from this repository:
 
@@ -18,7 +24,7 @@ Or if published to the registry:
 paks install prompt-writer
 ```
 
-### Option 2: Without Paks (Manual)
+### Option 3: Without Paks (Manual)
 
 Copy the skill files to your AI tool's skill directory:
 
@@ -41,7 +47,7 @@ prompt-writer/
 
 Most AI agents will automatically detect `SKILL.md` in the folder.
 
-### Option 3: Use SKILL.md Directly
+### Option 4: Use SKILL.md Directly
 
 If your AI tool doesn't support skills, just copy the `SKILL.md` content and paste it as a system prompt or custom instruction:
 
@@ -61,19 +67,26 @@ Once installed, activate the skill when you need to:
 
 | File | Purpose |
 |------|---------|
-| `SKILL.md` | Main skill with 5-phase prompt writing workflow, 13 patterns |
-| `references/production-patterns.md` | Analysis of 7 AI system patterns + context engineering |
-| `references/prompt-techniques.md` | 30 prompt engineering techniques |
+| `SKILL.md` | Main skill with 5-phase prompt writing workflow, 17 patterns |
+| `references/production-patterns.md` | Analysis of 13 AI systems + context engineering |
+| `references/mode-patterns.md` | 6 prompt modes (Chat, Builder, Vibe, Planning, Execution, Classifier) |
+| `references/tool-schema-patterns.md` | Tool definition JSON schema patterns and best practices |
+| `references/prompt-techniques.md` | 40 prompt engineering techniques |
 | `references/advanced-patterns.md` | Deep dive: Claude Code architecture, subagent delegation, injection defense |
-| `assets/prompt-templates.md` | 6 production-grade templates |
+| `assets/prompt-templates.md` | 10 production-grade templates |
 
 ## What's Inside
 
-Built from analysis of production AI systems:
+Built from analysis of **100 prompts** from **33+ production AI systems**:
 - **Windsurf (Cascade)** - Agentic coding patterns
 - **Manus AI** - Autonomous agent patterns
 - **Cursor** - IDE integration patterns
 - **Claude Code** - Foundation model patterns, subagent delegation
+- **Devin AI** - Autonomous software engineer with OS access
+- **Emergent E1** - MVP-first development, testing protocol
+- **Lovable** - Real-time web editor, discussion-first approach
+- **v0 (Vercel)** - Generative UI, read-only imports
+- **Google Antigravity** - Workflow system, design standards
 
 Plus 2025-2026 research on:
 - **ReAct** (Stanford) - Reason + Act loops for autonomous agents
