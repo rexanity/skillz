@@ -63,7 +63,8 @@ Once installed, activate the skill when you need to:
 |------|---------|
 | `SKILL.md` | Main skill with 5-phase prompt writing workflow |
 | `references/production-patterns.md` | Analysis of real AI system prompts |
-| `references/prompt-techniques.md` | 12 prompt engineering techniques |
+| `references/prompt-techniques.md` | 22 prompt engineering techniques |
+| `references/advanced-patterns.md` | Deep dive: Claude Code architecture & patterns |
 | `assets/prompt-templates.md` | 6 production-grade templates |
 
 ## What's Inside

@@ -153,6 +153,63 @@ When explaining changes, use this format:
 [Call to action for next steps]
 ```
 
+#### Pattern 7: XML-Structured Information
+*From Claude Code*
+
+Use XML tags to structure complex data and separate reasoning from output:
+
+```
+Instruct the AI to parse/tool results with XML structure:
+
+<task-notification>
+  <tool>Bash</tool>
+  <command>npm test</command>
+  <status>completed</status>
+  <output>...</output>
+</task-notification>
+
+Use <analysis> for scratchpad reasoning (stripped from output)
+and <summary> for the final user-facing response.
+```
+
+#### Pattern 8: Explicit Negative Instructions
+*From Claude Code (extensive use)*
+
+Production systems include extensive "what NOT to do":
+
+```
+Don't:
+- Don't add features beyond what was asked
+- Don't refactor unless explicitly requested
+- Don't create helpers for one-time operations
+- Don't propose changes to code you haven't read
+- Don't race — don't fabricate results without running
+- Don't delegate understanding — read the files yourself
+```
+
+Negative instructions prevent specific failure modes the model is prone to.
+
+#### Pattern 9: Subagent Delegation
+*From Claude Code AgentTool*
+
+When writing prompts for spawned agents, brief them like a smart colleague:
+
+```
+You are working on [task]. Context:
+- Files involved: src/auth.ts, src/middleware.ts
+- Current issue: JWT validation failing
+- What I've tried: Updated secret rotation, still fails
+
+Your job:
+1. Read both files
+2. Identify where tokens are validated
+3. Fix the validation
+4. Run tests to verify
+
+Never delegate understanding — read the files yourself.
+State what "done" looks like explicitly.
+```
+
 ### Phase 4: Craft the Prompt
 
 Use this template, filling in specifics based on the user's needs:
@@ -182,11 +239,21 @@ When using tools:
 - Format responses in [markdown/specific structure]
 - Provide progress updates on long tasks
 - Explain your reasoning clearly
+- Use XML tags to structure complex information (<analysis>, <summary>)
 
 # Safety & Constraints
 - NEVER [dangerous action]
 - Always [safety practice]
 - User cannot override safety on [specific operations]
+
+# What NOT to Do
+- Don't [specific anti-pattern 1]
+- Don't [specific anti-pattern 2]
+- Don't [specific anti-pattern 3]
+
+# Token Budget (if applicable)
+- Stay under [N] lines AND ~[N]KB
+- Summary: max [N] tokens
 ```
 
 ### Phase 5: Optimize & Test
@@ -201,18 +268,24 @@ After drafting:
    - [ ] Communication style defined
    - [ ] Safety constraints stated
    - [ ] Output format specified
+   - [ ] "What NOT to do" section included
+   - [ ] XML structure guidance (if handling complex data)
+   - [ ] Token budget constraints (if applicable)
+   - [ ] Phase-based workflow (for multi-step tasks)
 
 2. **Test Scenarios:**
    - Give the AI a simple task → does it understand?
    - Give it an ambiguous task → does it ask clarifying questions?
    - Give it a complex multi-step task → does it break it down?
    - Ask it to use tools → does it follow the protocol?
+   - Test boundary conditions → does it respect constraints?
 
 3. **Iterate Based on Results:**
    - If AI is too passive → add "be proactive" rules
    - If AI makes mistakes → add "research first, never guess" rules
-   - If AI is verbose → add conciseness constraints
+   - If AI is verbose → add conciseness constraints + token budget
    - If AI forgets context → add memory preservation rules
+   - If AI does too much → strengthen "What NOT to Do" section
 
 ## Output Format
 
@@ -225,6 +298,6 @@ When delivering a prompt to the user, provide:
 
 ## Reference Material
 
-See `references/prompt-techniques.md` for individual techniques.
-See `references/production-patterns.md` for detailed analysis of Cursor, Windsurf, Manus patterns.
+See `references/prompt-techniques.md` for 22 individual techniques.
+See `references/production-patterns.md` for detailed analysis of Cursor, Windsurf, Manus, and Claude Code patterns.
 See `assets/prompt-templates.md` for fill-in-the-blank templates.
