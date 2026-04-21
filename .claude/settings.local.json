@@ -4,7 +4,9 @@
       "Bash(rtk ls *)",
       "Bash(cp -r /Users/rexchung/work/skillz/repo-setup ~/.agents/skills/)",
       "Bash(ln -sf ~/.agents/skills/repo-setup ~/.claude/skills/repo-setup)",
-      "Bash(rtk wc *)"
+      "Bash(rtk wc *)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)"
     ]
   }
 }
