@@ -30,15 +30,50 @@ Run this when starting a new project or onboarding an existing repo:
 
 ## Setup Steps
 
-Work through these in order. Check if each already exists before creating.
+**First, run this check to see what's already installed:**
 
-### Step 1 — code-review-graph MCP
+```bash
+echo "=== RTK ===" && (rtk gain > /dev/null 2>&1 && echo "✓ installed" || echo "✗ not installed")
+echo "=== code-review-graph ===" && (code-review-graph status > /dev/null 2>&1 && echo "✓ installed + graph built" || (which code-review-graph > /dev/null 2>&1 && echo "✓ installed (no graph yet)" || echo "✗ not installed"))
+echo "=== CLAUDE.md ===" && ([ -f CLAUDE.md ] && echo "✓ exists" || echo "✗ missing")
+echo "=== .mcp.json ===" && ([ -f .mcp.json ] && echo "✓ exists" || echo "✗ missing")
+```
 
-**This plugin already configures the MCP via its bundled `.mcp.json`.** Verify `uvx` is available: `which uvx`. If not, install with `pip install uv`.
+Skip any step where the output shows ✓. Work through these in order.
 
-Tell the user: **restart Claude Code for the MCP to activate.**
+### Step 1 — RTK (Rust Token Killer)
 
-### Step 2 — CLAUDE.md
+Source: https://github.com/rtk-ai/rtk
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/rtk-ai/rtk/master/install.sh | sh
+rtk gain      # verify correct rtk (should show token savings stats)
+rtk init -g   # global initialization
+```
+
+⚠️ Name collision: if `rtk gain` fails, you may have the wrong `rtk`. Reinstall from the URL above.
+
+### Step 2 — code-review-graph MCP
+
+Source: https://github.com/tirth8205/code-review-graph
+
+This plugin bundles a `.mcp.json` for the MCP server, but you still need to install the tool and build the graph:
+
+```bash
+pip install code-review-graph
+code-review-graph build    # index the codebase (required before first use)
+```
+
+Tell the user: **restart Claude Code for the MCP to activate, then run `build`.**
+
+Other useful commands:
+```bash
+code-review-graph update    # incremental re-index after changes
+code-review-graph status    # show graph stats
+code-review-graph watch     # auto-update on file changes
+```
+
+### Step 3 — CLAUDE.md
 
 Check if `CLAUDE.md` exists. If yes, append the missing sections (don't overwrite existing project content). If no, create it from the template in `references/claude-md-template.md`.
 
@@ -54,28 +89,15 @@ Customize the verification commands section for the repo's tech stack:
 - Rust: `cargo test`, `cargo clippy`
 - Mixed: include both
 
-### Step 3 — Verify setup
+### Step 4 — Verify setup
 
 ```bash
-# Confirm .mcp.json is valid JSON
-cat .mcp.json | python3 -m json.tool
-
-# Confirm CLAUDE.md exists and has TDD section
-grep -l "TDD" CLAUDE.md
-```
-
-### Step 4 — Initial graph index (optional but recommended)
-
-After the user restarts Claude Code with the MCP active, run:
-```bash
-# The graph indexes automatically on first use.
-# To force index now if the MCP is already active:
-# Use the MCP tool: get_architecture_overview
+code-review-graph status    # confirms graph is built
+cat .mcp.json               # confirms MCP entry exists
 ```
 
 ## What NOT to do
 
 - Don't overwrite existing CLAUDE.md content — append the missing sections
 - Don't add project-specific details (stack, ports, business logic) — that's the user's job
-- Don't run `code-review-graph` CLI tools until the user confirms the MCP is active
 - Don't assume the tech stack — ask if it's not obvious from the repo files

@@ -6,7 +6,9 @@
       "Bash(ln -sf ~/.agents/skills/repo-setup ~/.claude/skills/repo-setup)",
       "Bash(rtk wc *)",
       "WebFetch(domain:github.com)",
-      "WebFetch(domain:raw.githubusercontent.com)"
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)"
     ]
   }
 }
