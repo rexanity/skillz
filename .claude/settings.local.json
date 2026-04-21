@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rtk ls *)",
+      "Bash(cp -r /Users/rexchung/work/skillz/repo-setup ~/.agents/skills/)",
+      "Bash(ln -sf ~/.agents/skills/repo-setup ~/.claude/skills/repo-setup)",
+      "Bash(rtk wc *)"
+    ]
+  }
+}

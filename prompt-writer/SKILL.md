@@ -487,61 +487,9 @@ When using tools:
 
 ### Phase 5: Optimize & Test
 
-After drafting:
+See `references/optimization-checklist.md` for the full review checklist, test scenarios, and iteration guide.
 
-1. **Checklist Review:**
-   - [ ] Role clearly defined
-   - [ ] Working mode specified (Chat / Builder / Vibe / Planning / Execution)
-   - [ ] Behavioral principles specified (3-7 rules)
-   - [ ] Reasoning pattern chosen (ReAct / Plan-and-Solve / Reflexion / ToT)
-   - [ ] Tool usage rules included (if applicable)
-   - [ ] Environment context included (if applicable)
-   - [ ] Development workflow defined (for coding agents)
-   - [ ] Quality standards explicit
-   - [ ] Communication style defined
-   - [ ] Testing protocol included (for coding agents)
-   - [ ] Safety constraints stated
-   - [ ] Output format specified
-   - [ ] "What NOT to do" section included
-   - [ ] XML structure guidance (if handling complex data)
-   - [ ] Token budget constraints (if applicable)
-   - [ ] Phase-based workflow (for multi-step tasks)
-   - [ ] Termination conditions defined (SUCCESS / FAILURE / MAX_STEPS / MAX_RETRIES)
-   - [ ] Error recovery paths specified
-   - [ ] Injection defense patterns (if agent reads external content)
-   - [ ] Context engineering assessed (right knowledge, minimal sufficient)
-   - [ ] Drift prevention rules (if long-running or multi-agent)
-
-2. **Test Scenarios:**
-   - Give the AI a simple task → does it understand?
-   - Give it an ambiguous task → does it ask clarifying questions?
-   - Give it a complex multi-step task → does it break it down?
-   - Ask it to use tools → does it follow the protocol?
-   - Test boundary conditions → does it respect constraints?
-   - Trigger a failure (invalid input) → does it recover gracefully?
-   - Test termination → does it stop when criteria are met?
-   - Test with malicious external content → does it defend against injection?
-
-3. **Iterate Based on Results:**
-   - If AI is too passive → add "be proactive" rules
-   - If AI makes mistakes → add "research first, never guess" rules
-   - If AI is verbose → add conciseness constraints + token budget
-   - If AI forgets context → add memory preservation rules
-   - If AI does too much → strengthen "What NOT to Do" section
-   - If AI runs forever → tighten termination conditions
-   - If AI gets stuck → strengthen error recovery paths
-   - If AI drifts off-topic → add drift prevention rules
-   - If AI follows malicious input → strengthen injection defense
-
-## Output Format
-
-When delivering a prompt to the user, provide:
-
-1. **The Complete Prompt** - Ready to copy-paste
-2. **Design Decisions** - Which patterns were used and why
-3. **Customization Tips** - How to adapt it for specific use cases
-4. **Testing Strategy** - How to validate it works effectively
-
+When delivering a prompt, include: the complete prompt (copy-paste ready), design decisions (patterns used and why), customization tips, and a testing strategy.
 ## Reference Material
 
 See `references/prompt-techniques.md` for 40 individual techniques.
