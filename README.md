@@ -1,98 +1,86 @@
-# Prompt Writer Skill
+# skillz
 
-Expert AI prompt writing skill built with production-proven patterns from Windsurf, Manus, Cursor, and Claude.
+A collection of Claude Code skills. Each skill is a folder with a `SKILL.md` file.
 
-## Installation
+## For AI: How to Help a User Install Skills
 
-### Option 1: With Vercel Skills (Recommended)
+When a user asks you to help them install a skill from this repo:
 
-```bash
-npx @vercel-labs/skills install https://github.com/rexanity/skillz/tree/main/prompt-writer
-```
-
-### Option 2: With Paks
-
-Install directly from this repository:
+1. **Show them the skill list below** and ask which one(s) they want, or recommend based on their goal.
+2. **Run the install command** for the chosen skill (copy the folder to `~/.claude/skills/`).
+3. **Verify** the skill landed at `~/.claude/skills/<skill-name>/SKILL.md`.
 
 ```bash
-paks install https://github.com/rexanity/skillz/tree/main/prompt-writer
+# Install a skill (replace <skill-name> with the folder name)
+mkdir -p ~/.claude/skills && cp -r /path/to/skillz/<skill-name> ~/.claude/skills/
+
+# Or clone and install directly from GitHub
+git clone https://github.com/rexanity/skillz /tmp/skillz
+cp -r /tmp/skillz/<skill-name> ~/.claude/skills/
 ```
 
-Or if published to the registry:
+After installing, the skill is available in Claude Code. The user may need to restart their Claude Code session.
+
+---
+
+## Available Skills
+
+### `prompt-writer`
+**What it does:** Crafts AI system prompts and agent instructions using patterns from 13+ production AI systems (Cursor, Windsurf, Manus, Claude Code, Devin, v0, etc.)
+
+**Use when the user wants to:**
+- Write or improve a system prompt
+- Design an agent's instructions or persona
+- Apply production prompt engineering patterns
+
+**Install:**
+```bash
+cp -r /tmp/skillz/prompt-writer ~/.claude/skills/
+```
+
+**Key files:**
+- `SKILL.md` — 5-phase prompt writing workflow, 17 patterns
+- `references/` — Production patterns, prompt techniques (40+), tool schema patterns
+- `assets/prompt-templates.md` — 10 ready-to-use templates
+
+---
+
+### `writing-skills`
+**What it does:** Teaches how to author, test, and iterate on Claude Code skills using a TDD-style workflow (write test → watch fail → write skill → watch pass → refactor).
+
+**Use when the user wants to:**
+- Create a new skill from scratch
+- Improve or debug an existing skill
+- Understand how to verify a skill actually changes agent behavior
+
+**Install:**
+```bash
+cp -r /tmp/skillz/writing-skills ~/.claude/skills/
+```
+
+**Key files:**
+- `SKILL.md` — TDD workflow for skill authoring
+- `anthropic-best-practices.md` — Anthropic's official skill authoring guidance
+- `testing-skills-with-subagents.md` — How to pressure-test skills with subagents
+
+---
+
+## Quick Install (all skills)
 
 ```bash
-paks install prompt-writer
+git clone https://github.com/rexanity/skillz /tmp/skillz
+mkdir -p ~/.claude/skills
+cp -r /tmp/skillz/prompt-writer ~/.claude/skills/
+cp -r /tmp/skillz/writing-skills ~/.claude/skills/
 ```
 
-### Option 3: Without Paks (Manual)
-
-Copy the skill files to your AI tool's skill directory:
-
-```bash
-# Clone the repository
-git clone https://github.com/rexanity/skillz.git
-
-# Copy the skill folder to your tool's skills directory
-cp -r skillz/prompt-writer ~/.your-ai-tool/skills/
-```
-
-Or simply copy the entire `prompt-writer/` folder wherever your AI agent can access it:
+## Skill Folder Layout
 
 ```
-prompt-writer/
-├── SKILL.md              # Main skill file (required)
-├── references/           # Reference docs (optional but recommended)
-└── assets/               # Templates (optional but recommended)
+<skill-name>/
+└── SKILL.md          # Required — this is what Claude Code loads
+└── references/       # Optional supporting docs
+└── assets/           # Optional templates / examples
 ```
 
-Most AI agents will automatically detect `SKILL.md` in the folder.
-
-### Option 4: Use SKILL.md Directly
-
-If your AI tool doesn't support skills, just copy the `SKILL.md` content and paste it as a system prompt or custom instruction:
-
-1. Open `prompt-writer/SKILL.md`
-2. Copy everything after the YAML frontmatter
-3. Paste into your AI tool's system prompt or custom instructions
-
-## Usage
-
-Once installed, activate the skill when you need to:
-- Write system prompts for AI agents
-- Improve existing prompts
-- Learn production prompt patterns
-- Create specialized prompts for coding, research, or automation
-
-## Structure
-
-| File | Purpose |
-|------|---------|
-| `SKILL.md` | Main skill with 5-phase prompt writing workflow, 17 patterns |
-| `references/production-patterns.md` | Analysis of 13 AI systems + context engineering |
-| `references/mode-patterns.md` | 6 prompt modes (Chat, Builder, Vibe, Planning, Execution, Classifier) |
-| `references/tool-schema-patterns.md` | Tool definition JSON schema patterns and best practices |
-| `references/prompt-techniques.md` | 40 prompt engineering techniques |
-| `references/advanced-patterns.md` | Deep dive: Claude Code architecture, subagent delegation, injection defense |
-| `assets/prompt-templates.md` | 10 production-grade templates |
-
-## What's Inside
-
-Built from analysis of **100 prompts** from **33+ production AI systems**:
-- **Windsurf (Cascade)** - Agentic coding patterns
-- **Manus AI** - Autonomous agent patterns
-- **Cursor** - IDE integration patterns
-- **Claude Code** - Foundation model patterns, subagent delegation
-- **Devin AI** - Autonomous software engineer with OS access
-- **Emergent E1** - MVP-first development, testing protocol
-- **Lovable** - Real-time web editor, discussion-first approach
-- **v0 (Vercel)** - Generative UI, read-only imports
-- **Google Antigravity** - Workflow system, design standards
-
-Plus 2025-2026 research on:
-- **ReAct** (Stanford) - Reason + Act loops for autonomous agents
-- **Context Engineering** - What knowledge to provide, not just how to ask
-- **Prompt Injection Defense** - Security patterns for agents reading external content
-- **Termination Conditions** - Preventing runaway agents
-- **Reflexion & Self-Correction** - Agents that learn from their own mistakes
-
-Includes: autonomous execution loops, tool protocols, safety models, memory management, code quality standards, structured communication formats, reasoning patterns (ReAct, Plan-and-Solve, ToT, Reflexion), error recovery, drift prevention, and injection defense.
+Claude Code loads any `SKILL.md` it finds under `~/.claude/skills/`. Subdirectory structure beyond that is for human and AI reference only.
