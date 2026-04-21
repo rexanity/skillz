@@ -1,0 +1,8 @@
+{
+  "name": "repo-setup",
+  "description": "Sets up a new repo with best practices: code-review-graph MCP, TDD + DoD workflow, CLAUDE.md template, and RTK token optimization.",
+  "author": {
+    "name": "rexchung",
+    "email": "rex.chung@gmail.com"
+  }
+}

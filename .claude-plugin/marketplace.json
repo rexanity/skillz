@@ -1,0 +1,18 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "rexanity",
+  "description": "Rex's Claude Code skills and plugins — repo setup, prompt writing, TDD workflows, and best practices.",
+  "owner": {
+    "name": "rexchung",
+    "email": "rex.chung@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "repo-setup",
+      "description": "Sets up a new repo with best practices: code-review-graph MCP, TDD + DoD workflow, CLAUDE.md template, and RTK token optimization.",
+      "category": "development",
+      "source": "./plugins/repo-setup",
+      "homepage": "https://github.com/rexanity/skillz/tree/main/plugins/repo-setup"
+    }
+  ]
+}
